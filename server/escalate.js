@@ -33,8 +33,8 @@ Meteor.methods({
    * @param {string} medium
    */
   heraldEscalate: function (notificationId, medium) {
-    check(notificationId, Meteor.Collection.ObjectID)
-    check(medium, String)
+    check(notificationId, String);
+    check(medium, String);
     try {
       Herald.escalate(notificationId, medium);
     } catch (e) {
@@ -73,6 +73,6 @@ Herald.escalate = function (notificationId, medium) {
   } else {
     var query = Herald._setProperty('media.' + medium + '.send', false);
   }
-  
+
   Herald.collection.update(notification._id, { $set: query } );
 };
